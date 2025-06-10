@@ -30,7 +30,7 @@ class MessageDaoImpl implements MessageDao {
 	}
 
 	@Override
-	public String add(final Message message) {
+	public void add(final Message message) {
 
 		final String query = "INSERT INTO \"smapp_message_history\" (receiver_id, sender_id, content, sent_timestamp) VALUES (?, ?, ?, ?)";
 
@@ -41,22 +41,16 @@ class MessageDaoImpl implements MessageDao {
 	         stmt.setString(3, message.getContent());
 			 stmt.setTimestamp(4, Timestamp.from(message.getSentTimestamp()));
 
-			 final int messageSent = stmt.executeUpdate();
-
-	         if(messageSent > 0) {
-	        	return ("Message sent successfully!");
-	        }
+			 stmt.executeUpdate();
 
 	    } catch (SQLException exception) {
 	        logger.error("Failed to send message! sender id={} receiver id={} Datetime={} ",message.getSenderId(), message.getReceiverId(), message.getSentTimestamp(), exception);
-	        return exception.toString();
 	    }
 
-	    return ("Message not sent!");
 	}
 
 	@Override
-	public String update(final Message message,final String updateType) {
+	public void update(final Message message,final String updateType) {
 
 		final String query = "UPDATE \"smapp_message_history\" SET content = ? WHERE id = ?";
 
@@ -65,22 +59,16 @@ class MessageDaoImpl implements MessageDao {
 			stmt.setString(1, message.getContent());
 			stmt.setInt(2, message.getId());
 
-			final int msgEdited = stmt.executeUpdate();
+			stmt.executeUpdate();
 
-			if(msgEdited > 0) {
-				return ("Message edited successfully!");
-			}
-
-		}catch(SQLException exception) {
+		} catch(SQLException exception) {
 			logger.error("Failed to edit message! message id={} content={}", message.getId(), message.getContent(), exception);
-			return exception.toString();
 		}
 
-		return ("Message id not found/Message not edited!");
 	}
 
 	@Override
-	public String delete(final Message message) {
+	public void delete(final Message message) {
 
 		final String query = "DELETE FROM \"smapp_message_history\"  WHERE id = ?";
 
@@ -88,18 +76,12 @@ class MessageDaoImpl implements MessageDao {
 			final PreparedStatement stmt = connection.prepareStatement(query)){
 			stmt.setInt(1, message.getId());
 
-			final int msgDeleted = stmt.executeUpdate();
-            
-            if(msgDeleted > 0) {
-            	return ("Message deleted successfully!");
-            }
+			stmt.executeUpdate();
 			
-		}catch(SQLException exception) {
+		} catch(SQLException exception) {
 			logger.error("Failed to delete message! message id={}", message.getId(), exception);
-			return exception.toString();
 		}
 
-	    return ("Message id not found/Message not deleted!");
 	}
 
 	@Override
@@ -134,8 +116,8 @@ class MessageDaoImpl implements MessageDao {
 			while (resultSet.next()) {
 				final int id = resultSet.getInt("id");
 				final String name = resultSet.getString("name");
-				final int unReadMessageCount = resultSet.getInt("unread_count");
-				final InboxInfo chatInfo = new InboxInfo(id, name, unReadMessageCount);
+				final int unreadMessageCount = resultSet.getInt("unread_count");
+				final InboxInfo chatInfo = new InboxInfo(id, name, unreadMessageCount);
 				inbox.add(chatInfo);
 			}
 
@@ -214,11 +196,11 @@ class MessageDaoImpl implements MessageDao {
 		try (final Connection connection = dataSource.getConnection();
 		    final PreparedStatement stmt = connection.prepareStatement(query)){
 
-			LocalDate firstDay = YearMonth.now().atDay(1);
-			LocalDate lastDay = YearMonth.now().atEndOfMonth();
+			final LocalDate firstDay = YearMonth.now().atDay(1);
+			final LocalDate lastDay = YearMonth.now().atEndOfMonth();
 
-			Timestamp from = Timestamp.valueOf(firstDay.atTime(LocalTime.MIN));
-			Timestamp to = Timestamp.valueOf(lastDay.atTime(LocalTime.MAX));
+			final Timestamp from = Timestamp.valueOf(firstDay.atTime(LocalTime.MIN));
+			final Timestamp to = Timestamp.valueOf(lastDay.atTime(LocalTime.MAX));
 
 			stmt.setTimestamp(1, from);
 			stmt.setTimestamp(2, to);
@@ -239,7 +221,7 @@ class MessageDaoImpl implements MessageDao {
 				messageReport.add(message);
 			}
 
-		}catch(Exception exception){
+		} catch(Exception exception){
 			logger.error("Failed to get message report!",exception);
 		}
 

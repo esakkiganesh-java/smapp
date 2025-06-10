@@ -29,9 +29,9 @@ public class UserController {
             return ResponseEntity.badRequest().body(new ApiResponse(errors.toString()));
         }
 
-        final String userAdded = userService.add(user);
+        userService.add(user);
 
-        return  ResponseEntity.ok(new ApiResponse(userAdded));
+        return  ResponseEntity.ok(new ApiResponse("User Registered successfully!"));
 
     }
 
@@ -44,9 +44,9 @@ public class UserController {
             return ResponseEntity.badRequest().body(new ApiResponse(errors.toString()));
         }
 
-        final String passwordUpdated = userService.update(user,updateType);
+        userService.update(user,updateType);
 
-        return ResponseEntity.ok().body(new ApiResponse(passwordUpdated));
+        return ResponseEntity.ok().body(new ApiResponse("Password updated successfully"));
     }
 
     @PutMapping("/updateName")
@@ -58,9 +58,9 @@ public class UserController {
             return ResponseEntity.badRequest().body(new ApiResponse(errors.toString()));
         }
 
-        final String nameUpdated = userService.update(user,updateType);
+        userService.update(user,updateType);
 
-        return ResponseEntity.ok().body(new ApiResponse(nameUpdated));
+        return ResponseEntity.ok().body(new ApiResponse("User name updated successfully!"));
     }
 
     @PutMapping("/updatePhone")
@@ -72,9 +72,9 @@ public class UserController {
             return ResponseEntity.badRequest().body(new ApiResponse(errors.toString()));
         }
 
-        final String phoneUpdated = userService.update(user,updateType);
+        userService.update(user,updateType);
 
-        return  ResponseEntity.ok().body(new ApiResponse(phoneUpdated));
+        return  ResponseEntity.ok().body(new ApiResponse("Phone No updated successfully!"));
     }
 
     @DeleteMapping("/delete")
@@ -85,9 +85,9 @@ public class UserController {
             return ResponseEntity.badRequest().body(new ApiResponse(errors.toString()));
         }
 
-        final String userDeleted = userService.delete(user);
+        userService.delete(user);
 
-        return ResponseEntity.ok().body(new ApiResponse(userDeleted));
+        return ResponseEntity.ok().body(new ApiResponse("User details deleted successfully!"));
     }
 
     @GetMapping("/get")

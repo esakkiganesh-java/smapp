@@ -23,7 +23,7 @@ class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public String add(final User user) {
+	public void add(final User user) {
 
 		final  String query = "INSERT INTO \"smapp_user\" (phone,name,password) VALUES (?,?,?)";
 
@@ -33,21 +33,16 @@ class UserDaoImpl implements UserDao {
 			stmt.setString(1, user.getPhone());
 			stmt.setString(2, user.getName());
 			stmt.setString(3, user.getPassword());
-
-			if(stmt.executeUpdate() > 0){
-				return("User registered successfully!");
-			}
+            stmt.executeUpdate();
 
 		} catch (SQLException exception) {
 			logger.error("Failed to add user! name={} phone={} password={}", user.getName(), user.getPhone(), user.getPassword(), exception);
-			return exception.toString();
 		}
 
-		return ("User not registered");
 	}
 
 	@Override
-	public String delete(final User user) {
+	public void delete(final User user) {
 
 		final String query = "UPDATE \"smapp_user\" SET is_deleted_user = ? WHERE phone = ? AND name = ? AND password = ?";
 	    
@@ -58,23 +53,16 @@ class UserDaoImpl implements UserDao {
 	        stmt.setString(2, user.getPhone());
 	        stmt.setString(3, user.getName());
 	        stmt.setString(4, user.getPassword());
-
-			final  int userDeleted = stmt.executeUpdate();
-
-	        if(userDeleted > 0){
-				return("User deleted successfully");
-			}
+			stmt.executeUpdate();
 
 	    } catch (SQLException exception) {
 	        logger.error("failed to delete user! name={} phone={} password={}", user.getName(), user.getPhone(), user.getPassword(), exception);
-	        return exception.toString();
 	    }
 
-		return("User details not found/User not deleted");
 	}
 
 	@Override
-	public String update(final User user, final String updateType){
+	public void update(final User user, final String updateType){
 		String query = null;
 		String firstParameter = null;
 		String secondParameter = null;
@@ -98,8 +86,8 @@ class UserDaoImpl implements UserDao {
 				id = user.getId();
 				numberOfParam = 1;
 			}
-			default -> {
-				return ("User details not updated!");
+			default ->{
+				return;
 			}
 		}
 
@@ -114,18 +102,12 @@ class UserDaoImpl implements UserDao {
 				 stmt.setString(2,secondParameter);
 			 }
 
-			 final int updated = stmt.executeUpdate();
+			 stmt.executeUpdate();
 
-			 if(updated > 0){
-				 return ("User details updated successfully!");
-			 }
-
-		}catch(Exception exception){
+		} catch(Exception exception){
 			logger.error("Failed to update user details", exception);
-			return exception.toString();
 		}
 
-		return ("User details not found/User details not updated");
 	}
 
 	public User getUser(final String phoneNo) {

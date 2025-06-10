@@ -17,15 +17,14 @@ class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String add(final User user) {
+	public void add(final User user) {
 		String hashedPassword = passwordEncrypter.hashPassword(user.getPassword());
 		user.setPassword(hashedPassword);
-		return userDao.add(user);
 	}
 
 	@Override
-	public String delete(final User user) {
-		return userDao.delete(user);
+	public void delete(final User user) {
+		 userDao.delete(user);
 	}
 
 	@Override
@@ -39,14 +38,14 @@ class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String update(final User user, final String updateType){
+	public void update(final User user, final String updateType){
 
 		if(updateType.equals("password")){
 			String hashedPassword = passwordEncrypter.hashPassword(user.getPassword());
 			user.setPassword(hashedPassword);
 		}
 
-		return  userDao.update(user,updateType);
+		userDao.update(user,updateType);
 	}
 
 	@Override

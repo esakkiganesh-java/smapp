@@ -16,18 +16,18 @@ class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
-	public String send(final Message message) {
-		return messageDao.add(message);
+	public void send(final Message message) {
+		messageDao.add(message);
 	}
 
 	@Override
-	public String edit(final Message message, final String updateType) {
-		return messageDao.update(message, updateType);
+	public void edit(final Message message, final String updateType) {
+		messageDao.update(message, updateType);
 	}
 
 	@Override
-	public String delete(final Message message) {
-		return messageDao.delete(message);
+	public void delete(final Message message){
+	   messageDao.delete(message);
 	}
 
 	@Override

@@ -6,11 +6,11 @@ import org.springframework.stereotype.Service;
 @Service
 public interface UserService {
 
-	String add(final User user);
+	void add(final User user);
 
-	String update(final User user, final String updateType);
+	void update(final User user, final String updateType);
 
-	String delete(final User user);
+	void delete(final User user);
 
 	int getUserId(final String phone);
 

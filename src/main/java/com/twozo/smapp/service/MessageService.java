@@ -8,11 +8,11 @@ import java.util.Collection;
 @Service
 public interface MessageService {
 
-	String send(final Message message);
+	void send(final Message message);
 
-	String edit(final Message message, String updateType);
+	void edit(final Message message, String updateType);
 
-	String delete(final Message message);
+	void delete(final Message message);
 
 	Collection<InboxInfo> getInbox(final int userId);
 

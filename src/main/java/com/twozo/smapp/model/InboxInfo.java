@@ -4,12 +4,12 @@ public class InboxInfo {
 
     private int userId;
     private String userName;
-    private int unReadMessageCount;
+    private int unreadMessageCount;
 
-    public InboxInfo(final int userId, final String userName, final int unReadMessageCount) {
+    public InboxInfo(final int userId, final String userName, final int unreadMessageCount) {
         this.userId = userId;
         this.userName = userName;
-        this.unReadMessageCount = unReadMessageCount;
+        this.unreadMessageCount = unreadMessageCount;
     }
 
     public InboxInfo(){ }
@@ -22,8 +22,8 @@ public class InboxInfo {
         return userName;
     }
 
-    public int getUnReadMessageCount(){
-        return unReadMessageCount;
+    public int getUnreadMessageCount(){
+        return unreadMessageCount;
     }
 
     public void setUserId(int userId) {
@@ -35,6 +35,6 @@ public class InboxInfo {
     }
 
     public void setUnReadMessageCount(int unReadMessageCount) {
-        this.unReadMessageCount = unReadMessageCount;
+        this.unreadMessageCount = unReadMessageCount;
     }
 }

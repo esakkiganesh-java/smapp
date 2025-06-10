@@ -44,9 +44,9 @@ public class MessageController {
             return ResponseEntity.badRequest().body(new ApiResponse(errors.toString()));
         }
 
-        final String messageSent = messageService.send(message);
+        messageService.send(message);
 
-        return ResponseEntity.ok().body(new ApiResponse(messageSent));
+        return ResponseEntity.ok().body(new ApiResponse("Message sent.."));
     }
 
     @PutMapping("/edit")
@@ -57,9 +57,9 @@ public class MessageController {
             return ResponseEntity.badRequest().body(new ApiResponse(errors.toString()));
         }
 
-        final String edited = messageService.edit(message, "edit");
+        messageService.edit(message, "edit");
 
-        return ResponseEntity.ok().body(new ApiResponse(edited));
+        return ResponseEntity.ok().body(new ApiResponse("Message edited successfully!"));
     }
 
     @DeleteMapping("/delete")
@@ -70,9 +70,9 @@ public class MessageController {
             return ResponseEntity.badRequest().body(new ApiResponse(errors.toString()));
         }
 
-        final String deleted = messageService.delete(message);
+        messageService.delete(message);
 
-        return ResponseEntity.ok().body(new ApiResponse(deleted));
+        return ResponseEntity.ok().body(new ApiResponse("Message deleted"));
     }
 
     @PostMapping("/inbox")
@@ -86,8 +86,8 @@ public class MessageController {
         final Collection<InboxInfo> chat = messageService.getInbox(user.getId());
         final Collection<InboxInfo> responseList = new ArrayList<>();
 
-        for (InboxInfo chatInfo : chat) {
-            responseList.add(new InboxInfo(chatInfo.getUserId(), chatInfo.getUserName(), chatInfo.getUnReadMessageCount()));
+        for (final InboxInfo chatInfo : chat) {
+            responseList.add(new InboxInfo(chatInfo.getUserId(), chatInfo.getUserName(), chatInfo.getUnreadMessageCount()));
         }
 
         return ResponseEntity.ok(responseList);

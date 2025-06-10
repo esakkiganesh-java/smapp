@@ -7,14 +7,14 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserDao extends Dao<User> {
 
-User getUser(final String phone);
+    User getUser(final String phone);
 
-Collection<User> getAllUser();
+    Collection<User> getAllUser();
 
-int getUserId(final String phone);
+    int getUserId(final String phone);
 
-String addToFavourites(final int userId, final int otherUserId);
+    String addToFavourites(final int userId, final int otherUserId);
 
-String removeFromFavourites(final int userId, final int otherUserId);
+    String removeFromFavourites(final int userId, final int otherUserId);
 
 }
