@@ -11,7 +11,7 @@ class MessageServiceImpl implements MessageService {
 
 	private final MessageDao messageDao;
 	
-	public MessageServiceImpl( final  MessageDao messageDao) {
+	public MessageServiceImpl(final  MessageDao messageDao) {
 		this.messageDao = messageDao;
 	}
 

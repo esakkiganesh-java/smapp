@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PasswordEncrypter {
 
-    private final int cost = 12;
+    private static final int cost = 12;
 
     public String hashPassword(final String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt(cost));

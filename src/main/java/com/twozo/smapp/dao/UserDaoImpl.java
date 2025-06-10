@@ -181,7 +181,7 @@ class UserDaoImpl implements UserDao {
 		return users;
 	}
 
-	public String addToFavourites(final int userId,final int otherUserId){
+	public boolean addToFavourites(final int userId,final int otherUserId){
 		final String query = "INSERT INTO \"smapp_favourite_users\" (user_id,favourite_user_id) VALUES (?,?)";
 		try(final Connection connection = dataSource.getConnection();
 		    final PreparedStatement stmt = connection.prepareStatement(query)){
@@ -191,18 +191,18 @@ class UserDaoImpl implements UserDao {
 			final int addedToFavourites = stmt.executeUpdate();
 
 			if(addedToFavourites > 0){
-				return ("Added to favourites");
+				return true;
 			}
 
 		} catch (SQLException exception) {
 			logger.error("failed to add favourites user id={} other user id={} ", userId, otherUserId, exception);
-			return exception.toString();
+			return false;
 		}
 
-		return ("Not added to favourites");
+		return false;
 	}
 
-	public String removeFromFavourites(final int userId, final int otherUserId){
+	public boolean removeFromFavourites(final int userId, final int otherUserId){
 		final String query = "DELETE FROM \"smapp_favourite_users\" WHERE user_id = ? AND favourite_user_id = ? ";
 		try(final Connection connection = dataSource.getConnection();
 			final PreparedStatement stmt = connection.prepareStatement(query)){
@@ -212,15 +212,15 @@ class UserDaoImpl implements UserDao {
 			final int removedFromFavourites = stmt.executeUpdate();
 
 			if(removedFromFavourites > 0){
-				return ("Removed from favourites");
+				return true;
 			}
 
 		} catch (SQLException exception) {
 			logger.error("failed to remove from favourites user id={} other user id={} ", userId, otherUserId, exception);
-			return exception.toString();
+			return false;
 		}
 
-		return ("Not removed from favourites");
+		return false;
 	}
 
 }

@@ -49,12 +49,12 @@ class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String addToFavourites(final int userId, final int otherUserId){
+	public boolean addToFavourites(final int userId, final int otherUserId){
 		return userDao.addToFavourites(userId, otherUserId);
 	}
 
 	@Override
-	public String removeFromFavourites(final int userId, final int otherUserId){
+	public boolean removeFromFavourites(final int userId, final int otherUserId){
 		return userDao.removeFromFavourites(userId, otherUserId);
 	}
 }

@@ -16,8 +16,8 @@ public interface UserService {
 
 	User getUser(final String phone);
 
-	String addToFavourites(final int userId, final int otherUserId);
+	boolean addToFavourites(final int userId, final int otherUserId);
 
-	String removeFromFavourites(final int userId, final int otherUserId);
+	boolean removeFromFavourites(final int userId, final int otherUserId);
 
 }

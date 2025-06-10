@@ -32,7 +32,6 @@ public class UserController {
         userService.add(user);
 
         return  ResponseEntity.ok(new ApiResponse("User Registered successfully!"));
-
     }
 
     @PutMapping("/updatePassword")
@@ -143,9 +142,13 @@ public class UserController {
             return ResponseEntity.badRequest().body(new ApiResponse(errors.toString()));
         }
 
-        final String addedToFavourites = userService.addToFavourites(userId,otherUserId);
+        final boolean addedToFavourites = userService.addToFavourites(userId,otherUserId);
 
-        return ResponseEntity.ok().body(new ApiResponse(addedToFavourites));
+        if(addedToFavourites) {
+            return ResponseEntity.ok().body(new ApiResponse("Added to favourites"));
+        }
+
+        return ResponseEntity.badRequest().body(new ApiResponse("Not Added to favourites"));
     }
 
     @PostMapping("/removeFromFavourites")
@@ -163,9 +166,13 @@ public class UserController {
             return ResponseEntity.badRequest().body(new ApiResponse(errors.toString()));
         }
 
-        final String removedFromFavourites = userService.removeFromFavourites(userId,otherUserId);
+        final boolean removedFromFavourites = userService.removeFromFavourites(userId,otherUserId);
 
-        return ResponseEntity.ok().body(new ApiResponse(removedFromFavourites));
+        if(removedFromFavourites){
+            return ResponseEntity.ok().body(new ApiResponse("Removed from favourites"));
+        }
+
+        return ResponseEntity.badRequest().body(new ApiResponse("Not removed from favourites"));
     }
 }
 

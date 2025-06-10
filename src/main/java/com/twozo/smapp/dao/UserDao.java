@@ -13,8 +13,8 @@ public interface UserDao extends Dao<User> {
 
     int getUserId(final String phone);
 
-    String addToFavourites(final int userId, final int otherUserId);
+    boolean addToFavourites(final int userId, final int otherUserId);
 
-    String removeFromFavourites(final int userId, final int otherUserId);
+    boolean removeFromFavourites(final int userId, final int otherUserId);
 
 }
