@@ -10,7 +10,7 @@ public interface MessageDao extends Dao<Message> {
 
 	Collection<InboxInfo> getInbox(final int userId);
 
-	Collection<Message> getChatHistory(final int senderId,final int receiverId);
+	Collection<Message> getChatHistory(final int senderId, final int receiverId);
 
 	Collection<Message> getMessageReport();
 

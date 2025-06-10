@@ -9,7 +9,7 @@ import java.util.Collection;
 public class MessageValidator implements Validator<Message>{
 
     @Override
-    public Collection<String> validate(final Message message,final ValidationType validationType){
+    public Collection<String> validate(final Message message, final ValidationType validationType){
 
         final Collection<String> errors = new ArrayList<>();
 
@@ -24,7 +24,7 @@ public class MessageValidator implements Validator<Message>{
         return errors;
     }
 
-    private void validateAdd(final Message message,final Collection<String> errors){
+    private void validateAdd(final Message message, final Collection<String> errors){
 
         if (message.getSenderId() <= 0) {
             errors.add("invalid! sender Id must be greater than zero");
@@ -39,7 +39,7 @@ public class MessageValidator implements Validator<Message>{
         }
     }
 
-    private void validateUpdate(final Message message,final Collection<String> errors){
+    private void validateUpdate(final Message message, final Collection<String> errors){
 
         if (message.getId() <= 0) {
             errors.add("invalid! Message id must be greater than zero");

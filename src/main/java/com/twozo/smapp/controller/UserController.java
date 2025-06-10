@@ -16,7 +16,7 @@ public class UserController {
     private final UserService userService;
     private final UserValidator userValidator;
 
-    public UserController(final UserService userService,final UserValidator userValidator) {
+    public UserController(final UserService userService, final UserValidator userValidator) {
         this.userService = userService;
         this.userValidator = userValidator;
     }
@@ -129,7 +129,7 @@ public class UserController {
     }
 
     @PostMapping("/addToFavourites")
-    public ResponseEntity<ApiResponse> addFavourites(@RequestParam final int userId,@RequestParam final int otherUserId){
+    public ResponseEntity<ApiResponse> addFavourites(@RequestParam final int userId, @RequestParam final int otherUserId){
         final User user = new User();
         user.setId(userId);
         Collection<String> errors = userValidator.validate(user,ValidationType.CHECK_ID);
@@ -149,7 +149,7 @@ public class UserController {
     }
 
     @PostMapping("/removeFromFavourites")
-    public ResponseEntity<ApiResponse> removeFromFavourites(@RequestParam final int userId,@RequestParam final int otherUserId){
+    public ResponseEntity<ApiResponse> removeFromFavourites(@RequestParam final int userId, @RequestParam final int otherUserId){
         final User user = new User();
         user.setId(userId);
         Collection<String> errors = userValidator.validate(user,ValidationType.CHECK_ID);

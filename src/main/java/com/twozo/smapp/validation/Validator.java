@@ -4,8 +4,8 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 
 @Service
-public interface Validator<Type> {
+public interface Validator<T> {
 
-    Collection<String> validate(final Type type,ValidationType validationType);
+    Collection<String> validate(final T type, ValidationType validationType);
 
 }

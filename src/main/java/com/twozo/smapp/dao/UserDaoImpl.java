@@ -27,8 +27,8 @@ class UserDaoImpl implements UserDao {
 
 		final  String query = "INSERT INTO \"smapp_user\" (phone,name,password) VALUES (?,?,?)";
 
-		try (final Connection connection = dataSource.getConnection()) {
-			 final PreparedStatement stmt = connection.prepareStatement(query);
+		try (final Connection connection = dataSource.getConnection();
+			 final PreparedStatement stmt = connection.prepareStatement(query)){
 
 			stmt.setString(1, user.getPhone());
 			stmt.setString(2, user.getName());
@@ -39,7 +39,7 @@ class UserDaoImpl implements UserDao {
 			}
 
 		} catch (SQLException exception) {
-			logger.error("Failed to add user! name={} phone={} password={}",user.getName(),user.getPhone(),user.getPassword(),exception);
+			logger.error("Failed to add user! name={} phone={} password={}", user.getName(), user.getPhone(), user.getPassword(), exception);
 			return exception.toString();
 		}
 
@@ -51,8 +51,8 @@ class UserDaoImpl implements UserDao {
 
 		final String query = "UPDATE \"smapp_user\" SET is_deleted_user = ? WHERE phone = ? AND name = ? AND password = ?";
 	    
-	    try (final Connection connection = dataSource.getConnection()) {
-	         final PreparedStatement stmt = connection.prepareStatement(query);
+	    try (final Connection connection = dataSource.getConnection();
+	         final PreparedStatement stmt = connection.prepareStatement(query)) {
 
 	        stmt.setBoolean(1, true);
 	        stmt.setString(2, user.getPhone());
@@ -66,7 +66,7 @@ class UserDaoImpl implements UserDao {
 			}
 
 	    } catch (SQLException exception) {
-	        logger.error("failed to delete user! name={} phone={} password={}",user.getName(),user.getPhone(),user.getPassword(),exception);
+	        logger.error("failed to delete user! name={} phone={} password={}", user.getName(), user.getPhone(), user.getPassword(), exception);
 	        return exception.toString();
 	    }
 
@@ -74,7 +74,7 @@ class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public String update(final User user,final String updateType){
+	public String update(final User user, final String updateType){
 		String query = null;
 		String firstParameter = null;
 		String secondParameter = null;
@@ -121,7 +121,7 @@ class UserDaoImpl implements UserDao {
 			 }
 
 		}catch(Exception exception){
-			logger.error("Failed to update user details",exception);
+			logger.error("Failed to update user details", exception);
 			return exception.toString();
 		}
 
@@ -146,7 +146,7 @@ class UserDaoImpl implements UserDao {
 				}
 
 		} catch (SQLException exception) {
-			logger.error("Failed to get User! phone={}",phoneNo,exception);
+			logger.error("Failed to get User! phone={}", phoneNo, exception);
 		}
 
 		return null;
@@ -167,7 +167,7 @@ class UserDaoImpl implements UserDao {
 			}
 
 		} catch (SQLException exception) {
-			logger.error("Failed to get User id! phone={}",phone,exception);
+			logger.error("Failed to get User id! phone={}", phone, exception);
 		}
 
 		return -1;
@@ -213,14 +213,14 @@ class UserDaoImpl implements UserDao {
 			}
 
 		} catch (SQLException exception) {
-			logger.error("failed to add favourites user id={} other user id={} ",userId,otherUserId,exception);
+			logger.error("failed to add favourites user id={} other user id={} ", userId, otherUserId, exception);
 			return exception.toString();
 		}
 
 		return ("Not added to favourites");
 	}
 
-	public String removeFromFavourites(final int userId,final int otherUserId){
+	public String removeFromFavourites(final int userId, final int otherUserId){
 		final String query = "DELETE FROM \"smapp_favourite_users\" WHERE user_id = ? AND favourite_user_id = ? ";
 		try(final Connection connection = dataSource.getConnection();
 			final PreparedStatement stmt = connection.prepareStatement(query)){
@@ -234,7 +234,7 @@ class UserDaoImpl implements UserDao {
 			}
 
 		} catch (SQLException exception) {
-			logger.error("failed to remove from favourites user id={} other user id={} ",userId,otherUserId,exception);
+			logger.error("failed to remove from favourites user id={} other user id={} ", userId, otherUserId, exception);
 			return exception.toString();
 		}
 

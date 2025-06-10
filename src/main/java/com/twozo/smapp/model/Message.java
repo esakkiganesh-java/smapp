@@ -15,14 +15,14 @@ public class Message {
     private Instant sentTimestamp;
     private MessageStatus status;
 
-    public Message(final int receiverId,final String content,final int senderId,final Instant sentTimestamp){
+    public Message(final int receiverId, final String content, final int senderId, final Instant sentTimestamp){
         this.receiverId = receiverId;
         this.content = content;
         this.senderId = senderId;
         this.sentTimestamp = sentTimestamp;
     }
 
-    public Message(final int id,final int receiverId,final String receiverName,final String content,final int senderId,final String senderName,final Instant sentTimestamp,final MessageStatus status){
+    public Message(final int id, final int receiverId, final String receiverName, final String content, final int senderId, final String senderName, final Instant sentTimestamp, final MessageStatus status){
         this.id = id;
         this.receiverId = receiverId;
         this.receiverName = receiverName;
@@ -33,12 +33,12 @@ public class Message {
         this.status = status;
     }
 
-    public Message(final int senderId,final int receiverId) {
+    public Message(final int senderId, final int receiverId) {
         this.senderId = senderId;
         this.receiverId = receiverId;
     }
 
-    public Message(final int id,final String content) {
+    public Message(final int id, final String content) {
         this.id = id;
         this.content = content;
     }

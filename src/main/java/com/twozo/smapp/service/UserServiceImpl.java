@@ -11,7 +11,7 @@ class UserServiceImpl implements UserService {
 	private final UserDao userDao;
 	private final PasswordEncrypter passwordEncrypter;
 	
-	public UserServiceImpl(final UserDao userDao,final PasswordEncrypter passwordEncrypter) {
+	public UserServiceImpl(final UserDao userDao, final PasswordEncrypter passwordEncrypter) {
 		this.userDao = userDao;
 		this.passwordEncrypter = passwordEncrypter;
 	}
@@ -39,7 +39,7 @@ class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String update(final User user,final String updateType){
+	public String update(final User user, final String updateType){
 
 		if(updateType.equals("password")){
 			String hashedPassword = passwordEncrypter.hashPassword(user.getPassword());
@@ -50,12 +50,12 @@ class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String addToFavourites(final int userId,final int otherUserId){
+	public String addToFavourites(final int userId, final int otherUserId){
 		return userDao.addToFavourites(userId, otherUserId);
 	}
 
 	@Override
-	public String removeFromFavourites(final int userId,final int otherUserId){
+	public String removeFromFavourites(final int userId, final int otherUserId){
 		return userDao.removeFromFavourites(userId, otherUserId);
 	}
 }

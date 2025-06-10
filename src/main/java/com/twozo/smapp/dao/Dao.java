@@ -1,11 +1,11 @@
 package com.twozo.smapp.dao;
 
-public interface Dao<Type> {
+public interface Dao<T> {
 
-    String add(final Type type);
+    String add(final T type);
 
-    String delete(final Type type);
+    String delete(final T type);
 
-    String update(final Type type, final String updateType);
+    String update(final T type, final String updateType);
 
 }

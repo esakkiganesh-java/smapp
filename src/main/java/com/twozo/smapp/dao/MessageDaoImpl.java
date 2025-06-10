@@ -43,12 +43,12 @@ class MessageDaoImpl implements MessageDao {
 
 			 final int messageSent = stmt.executeUpdate();
 
-	        if(messageSent > 0) {
+	         if(messageSent > 0) {
 	        	return ("Message sent successfully!");
 	        }
 
 	    } catch (SQLException exception) {
-	        logger.error("Failed to send message! sender id={} receiver id={} Datetime={} ",message.getSenderId(),message.getReceiverId(),message.getSentTimestamp(),exception);
+	        logger.error("Failed to send message! sender id={} receiver id={} Datetime={} ",message.getSenderId(), message.getReceiverId(), message.getSentTimestamp(), exception);
 	        return exception.toString();
 	    }
 
@@ -72,7 +72,7 @@ class MessageDaoImpl implements MessageDao {
 			}
 
 		}catch(SQLException exception) {
-			logger.error("Failed to edit message! message id={} content={}",message.getId(),message.getContent(),exception);
+			logger.error("Failed to edit message! message id={} content={}", message.getId(), message.getContent(), exception);
 			return exception.toString();
 		}
 
@@ -95,7 +95,7 @@ class MessageDaoImpl implements MessageDao {
             }
 			
 		}catch(SQLException exception) {
-			logger.error("Failed to delete message! message id={}",message.getId(),exception);
+			logger.error("Failed to delete message! message id={}", message.getId(), exception);
 			return exception.toString();
 		}
 
@@ -135,12 +135,12 @@ class MessageDaoImpl implements MessageDao {
 				final int id = resultSet.getInt("id");
 				final String name = resultSet.getString("name");
 				final int unReadMessageCount = resultSet.getInt("unread_count");
-				final InboxInfo chatInfo = new InboxInfo(id,name,unReadMessageCount);
+				final InboxInfo chatInfo = new InboxInfo(id, name, unReadMessageCount);
 				inbox.add(chatInfo);
 			}
 
 		} catch (SQLException exception) {
-			logger.error("Failed to get inbox! user id={}",userId,exception);
+			logger.error("Failed to get inbox! user id={}", userId, exception);
 		}
 
 		return inbox;
@@ -186,7 +186,7 @@ class MessageDaoImpl implements MessageDao {
                     final MessageStatus status = MessageStatus.valueOf(resultSet.getString("status").toUpperCase());
 
 
-                    final Message chat = new Message(messageId, receiver,receiverName,content, sender,senderName,timestamp,status);
+                    final Message chat = new Message(messageId, receiver, receiverName, content, sender, senderName, timestamp, status);
 		            chatHistory.add(chat);
 		        }
 
@@ -235,7 +235,7 @@ class MessageDaoImpl implements MessageDao {
 				final Timestamp timestamp = resultSet.getTimestamp("sent_timestamp");
 				final Instant sentTimestamp = timestamp.toInstant();
 				final MessageStatus status = MessageStatus.valueOf(resultSet.getString("status").toUpperCase());
-				final Message message = new Message(messageId,receiverId,receiverName,content,senderId,senderName,sentTimestamp,status);
+				final Message message = new Message(messageId, receiverId, receiverName, content, senderId, senderName, sentTimestamp, status);
 				messageReport.add(message);
 			}
 
@@ -256,7 +256,7 @@ class MessageDaoImpl implements MessageDao {
 			 stmt.setInt(2,userId);
 			 stmt.executeUpdate();
 		} catch (SQLException exception) {
-			logger.error("failed to mark message as seen! user id={}",userId,exception);
+			logger.error("failed to mark message as seen! user id={}", userId, exception);
 		}
 	}
 }

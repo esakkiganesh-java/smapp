@@ -21,8 +21,8 @@ class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
-	public String edit(final Message message,String updateType) {
-		return messageDao.update(message,updateType);
+	public String edit(final Message message, final String updateType) {
+		return messageDao.update(message, updateType);
 	}
 
 	@Override
@@ -36,7 +36,7 @@ class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
-	public Collection<Message> getChatHistory(final int senderId,final int receiverId){
+	public Collection<Message> getChatHistory(final int senderId, final int receiverId){
 		messageDao.markMessagesAsSeen(senderId);
 		return messageDao.getChatHistory(senderId,receiverId);
 	}

@@ -6,11 +6,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class PasswordEncrypter {
 
-    public String hashPassword(String password) {
-        return BCrypt.hashpw(password, BCrypt.gensalt(12));
+    private final int cost = 12;
+
+    public String hashPassword(final String password) {
+        return BCrypt.hashpw(password, BCrypt.gensalt(cost));
     }
 
-    public boolean verifyPassword(String password, String hashed) {
+    public boolean verifyPassword(final String password, final String hashed) {
         return BCrypt.checkpw(password, hashed);
     }
 }

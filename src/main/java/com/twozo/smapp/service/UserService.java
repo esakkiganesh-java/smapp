@@ -8,7 +8,7 @@ public interface UserService {
 
 	String add(final User user);
 
-	String update(final User user,String updateType);
+	String update(final User user, final String updateType);
 
 	String delete(final User user);
 
@@ -16,8 +16,8 @@ public interface UserService {
 
 	User getUser(final String phone);
 
-	String addToFavourites(final int userId,final int otherUserId);
+	String addToFavourites(final int userId, final int otherUserId);
 
-	String removeFromFavourites(final int userId,final int otherUserId);
+	String removeFromFavourites(final int userId, final int otherUserId);
 
 }

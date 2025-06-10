@@ -94,7 +94,7 @@ public class MessageController {
     }
 
     @PostMapping("/chatHistory")
-    public ResponseEntity<?> getChatHistory(@RequestParam final int senderId,@RequestParam final int receiverId) {
+    public ResponseEntity<?> getChatHistory(@RequestParam final int senderId, @RequestParam final int receiverId) {
         final Message message = new Message();
         message.setSenderId(senderId);
         message.setReceiverId(receiverId);
@@ -105,25 +105,14 @@ public class MessageController {
         }
 
         final Collection<Message> chatHistory = messageService.getChatHistory(senderId,receiverId);
-        final Collection<Message> responseList = new ArrayList<>();
 
-        for (Message msg : chatHistory) {
-            responseList.add(new Message(msg.getId(), msg.getReceiverId(), msg.getReceiverName(), msg.getContent(), msg.getSenderId(), msg.getSenderName(), msg.getSentTimestamp(), msg.getStatus()));
-        }
-
-        return ResponseEntity.ok(responseList);
+        return ResponseEntity.ok(chatHistory);
     }
 
     @GetMapping("getReport")
     public ResponseEntity<Collection<Message>> getReport(){
         final Collection<Message> messageReport = messageService.getMessageReport();
-        final Collection<Message> responseList = new ArrayList<>();
-
-        for (Message msg : messageReport) {
-            responseList.add(new Message(msg.getId(), msg.getReceiverId(), msg.getReceiverName(), msg.getContent(), msg.getSenderId(), msg.getSenderName(), msg.getSentTimestamp(), msg.getStatus()));
-        }
-
-        return ResponseEntity.ok(responseList);
+        return ResponseEntity.ok(messageReport);
     }
 }
 

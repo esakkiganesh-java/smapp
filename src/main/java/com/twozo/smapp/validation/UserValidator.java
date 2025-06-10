@@ -11,7 +11,7 @@ public  class UserValidator implements Validator<User> {
     private static final String phoneNumberFormat = "^[6-9][0-9]{9}$";
 
     @Override
-    public Collection<String> validate(final User user,final ValidationType validationType){
+    public Collection<String> validate(final User user, final ValidationType validationType){
         final Collection<String> errors = new ArrayList<>();
 
         switch(validationType){
@@ -52,7 +52,7 @@ public  class UserValidator implements Validator<User> {
         }
     }
 
-    private void validateId(final User user,final Collection<String> errors){
+    private void validateId(final User user, final Collection<String> errors){
 
         if(user.getId() <= 0){
             errors.add("Invalid!  id must be greater than zero");
@@ -66,7 +66,7 @@ public  class UserValidator implements Validator<User> {
         }
     }
 
-    private void validateUpdatePassword(final User user,final Collection<String> errors){
+    private void validateUpdatePassword(final User user, final Collection<String> errors){
 
         if (user.getId() <= 0) {
             errors.add("Invalid! id must be greater than zero");

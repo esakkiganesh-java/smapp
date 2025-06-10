@@ -31,7 +31,7 @@ public class User {
         this.name = name;
     }
 
-    public User(final int id,final String password) {
+    public User(final int id, final String password) {
         this.id = id;
         this.password = password;
     }
