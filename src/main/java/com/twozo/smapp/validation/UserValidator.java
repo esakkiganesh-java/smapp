@@ -27,27 +27,42 @@ public  class UserValidator implements Validator<User> {
     }
 
     private void validateAdd(final User user, final Collection<String> errors){
+        final String name = user.getName();
+        final String phone = user.getPhone();
+        final String password = user.getPassword();
 
-        if(user.getName() == null || user.getName().trim().isEmpty() || user.getName().trim().length() > 20){
-            errors.add("Invalid! User name should  not empty or not greater than 20 characters");
+        if (name == null) {
+            errors.add("Invalid! User name must not be null");
+        } else {
+            final String trimmedName = name.trim();
+            if (trimmedName.isEmpty() || trimmedName.length() > 20) {
+                errors.add("Invalid! User name should not be empty or exceed 20 characters");
+            }
         }
 
-        if(user.getPhone() == null || !user.getPhone().matches(phoneNumberFormat)){
+        if(phone == null || !phone.matches(phoneNumberFormat)){
             errors.add("Invalid! Phone number must contains 10 positive digits and starts with(6 to 9)");
         }
 
-        if(user.getPassword() == null || user.getPassword().length() < 8){
+        if(password  == null || password.length() < 8){
             errors.add("Invalid! Password must contains minimum 8 digits");
         }
     }
 
     private void validateUpdate(final User user, final Collection<String> errors){
+        final String name = user.getName();
+        final String phone = user.getPhone();
 
-        if(user.getName() == null || user.getName().trim().isEmpty() || user.getName().trim().length() > 20){
-            errors.add("Invalid! User name should  not empty or not greater than 20 characters");
+        if (name == null) {
+            errors.add("Invalid! User name must not be null");
+        } else {
+            final String trimmedName = name.trim();
+            if (trimmedName.isEmpty() || trimmedName.length() > 20) {
+                errors.add("Invalid! User name should not be empty or exceed 20 characters");
+            }
         }
 
-        if(user.getPhone() == null || !user.getPhone().matches(phoneNumberFormat)) {
+        if(phone == null || !phone.matches(phoneNumberFormat)) {
             errors.add("Invalid! Phone number must contains 10 positive digits and starts with(6 to 9)");
         }
     }
@@ -60,19 +75,22 @@ public  class UserValidator implements Validator<User> {
     }
 
     private void validateGetUser(final User user, final Collection<String> errors){
+        final String phone = user.getPhone();
 
-        if (user.getPhone() == null || !user.getPhone().matches(phoneNumberFormat)) {
+        if (phone == null || !phone.matches(phoneNumberFormat)) {
             errors.add("Invalid! Phone number must contains 10 positive digits and starts with(6 to 9)");
         }
     }
 
     private void validateUpdatePassword(final User user, final Collection<String> errors){
+        final int id = user.getId();
+        final String password = user.getPassword();
 
-        if (user.getId() <= 0) {
+        if (id <= 0) {
             errors.add("Invalid! id must be greater than zero");
         }
 
-        if(user.getPassword() == null || user.getPassword().length() < 8){
+        if(password == null || password.length() < 8){
             errors.add("Invalid! Password must contains minimum 8 digits");
         }
     }

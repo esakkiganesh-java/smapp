@@ -8,6 +8,7 @@ import com.twozo.smapp.validation.ValidationType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/user")
@@ -36,13 +37,13 @@ public class UserController {
 
     @PutMapping("/updatePassword")
     public ResponseEntity<ApiResponse> updatePassword(@RequestBody final User user) {
-        final String updateType = "password";
         final Collection<String> errors = userValidator.validate(user,ValidationType.UPDATE_PASSWORD);
 
         if(!errors.isEmpty()){
             return ResponseEntity.badRequest().body(new ApiResponse(errors.toString()));
         }
 
+        final String updateType = "password";
         userService.update(user,updateType);
 
         return ResponseEntity.ok().body(new ApiResponse("Password updated successfully"));
@@ -50,13 +51,13 @@ public class UserController {
 
     @PutMapping("/updateName")
     public ResponseEntity<ApiResponse> updateName(@RequestBody final User user) {
-        final String updateType = "name";
         final Collection<String> errors = userValidator.validate(user,ValidationType.UPDATE);
 
         if(!errors.isEmpty()){
             return ResponseEntity.badRequest().body(new ApiResponse(errors.toString()));
         }
 
+        final String updateType = "name";
         userService.update(user,updateType);
 
         return ResponseEntity.ok().body(new ApiResponse("User name updated successfully!"));
@@ -64,13 +65,13 @@ public class UserController {
 
     @PutMapping("/updatePhone")
     public ResponseEntity<ApiResponse> updatePhone(@RequestBody final User user) {
-        final String updateType = "phone";
         final Collection<String> errors = userValidator.validate(user,ValidationType.UPDATE);
 
         if(!errors.isEmpty()){
             return ResponseEntity.badRequest().body(new ApiResponse(errors.toString()));
         }
 
+        final String updateType = "phone";
         userService.update(user,updateType);
 
         return  ResponseEntity.ok().body(new ApiResponse("Phone No updated successfully!"));
@@ -100,7 +101,7 @@ public class UserController {
 
         final User userData = userService.getUser(user.getPhone());
 
-        if(userData != null) {
+        if(Objects.nonNull(userData)) {
             return ResponseEntity.ok(new User(userData.getId(),userData.getPhone(),userData.getName()));
         }
 
@@ -131,7 +132,7 @@ public class UserController {
     public ResponseEntity<ApiResponse> addFavourites(@RequestParam final int userId, @RequestParam final int otherUserId){
         final User user = new User();
         user.setId(userId);
-        Collection<String> errors = userValidator.validate(user,ValidationType.CHECK_ID);
+        final Collection<String> errors = userValidator.validate(user,ValidationType.CHECK_ID);
         user.setId(otherUserId);
 
         if(!userValidator.validate(user,ValidationType.CHECK_ID).isEmpty()){
@@ -155,7 +156,7 @@ public class UserController {
     public ResponseEntity<ApiResponse> removeFromFavourites(@RequestParam final int userId, @RequestParam final int otherUserId){
         final User user = new User();
         user.setId(userId);
-        Collection<String> errors = userValidator.validate(user,ValidationType.CHECK_ID);
+        final Collection<String> errors = userValidator.validate(user,ValidationType.CHECK_ID);
         user.setId(otherUserId);
 
         if(!userValidator.validate(user,ValidationType.CHECK_ID).isEmpty()){

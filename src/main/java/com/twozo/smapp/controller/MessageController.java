@@ -87,7 +87,7 @@ public class MessageController {
         final Collection<InboxInfo> responseList = new ArrayList<>();
 
         for (final InboxInfo chatInfo : chat) {
-            responseList.add(new InboxInfo(chatInfo.getUserId(), chatInfo.getUserName(), chatInfo.getUnreadMessageCount()));
+            responseList.add(new InboxInfo(chatInfo.userId(), chatInfo.userName(), chatInfo.unreadMessageCount()));
         }
 
         return ResponseEntity.ok(responseList);

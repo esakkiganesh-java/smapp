@@ -25,27 +25,32 @@ public class MessageValidator implements Validator<Message>{
     }
 
     private void validateAdd(final Message message, final Collection<String> errors){
+        final int senderId = message.getSenderId();
+        final int receiverId = message.getReceiverId();
+        final String content = message.getContent();
 
-        if (message.getSenderId() <= 0) {
+        if (senderId <= 0) {
             errors.add("invalid! sender Id must be greater than zero");
         }
 
-        if (message.getReceiverId() <= 0) {
+        if (receiverId <= 0) {
             errors.add("invalid! receiver Id must be greater than zero");
         }
 
-        if (message.getContent().trim().isEmpty()) {
+        if (content == null || content.trim().isEmpty()) {
             errors.add("invalid! Message content should not be empty");
         }
     }
 
     private void validateUpdate(final Message message, final Collection<String> errors){
+        final int id = message.getId();
+        final String content = message.getContent();
 
-        if (message.getId() <= 0) {
+        if (id <= 0) {
             errors.add("invalid! Message id must be greater than zero");
         }
 
-        if (message.getContent() == null || message.getContent().trim().isEmpty()) {
+        if (content == null || content.trim().isEmpty()) {
             errors.add("Message content should not be empty");
         }
     }
@@ -58,12 +63,14 @@ public class MessageValidator implements Validator<Message>{
     }
 
     private void validateGetChat(final Message message, final Collection<String> errors){
+        final int senderId = message.getSenderId();
+        final int receiverId = message.getReceiverId();
 
-        if (message.getSenderId() <= 0) {
+        if (senderId <= 0) {
             errors.add("invalid! sender id must be greater than zero");
         }
 
-        if (message.getReceiverId() <= 0) {
+        if (receiverId <= 0) {
             errors.add("invalid! receiver id must be greater than zero");
         }
     }

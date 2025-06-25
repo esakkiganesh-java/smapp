@@ -229,13 +229,14 @@ class MessageDaoImpl implements MessageDao {
 	}
 
 	public void markMessagesAsSeen(final int userId) {
-		final String query = "UPDATE \"smapp_message_history\" SET status = ?::message_status WHERE receiver_id = ? AND status = 'delivered' ";
+		final String query = "UPDATE \"smapp_message_history\" SET status = ?::message_status WHERE receiver_id = ? AND status = ? ";
 
 		try (final Connection connection = dataSource.getConnection();
 			 final PreparedStatement stmt = connection.prepareStatement(query)) {
 
 			 stmt.setString(1, String.valueOf(MessageStatus.SEEN).toLowerCase());
 			 stmt.setInt(2,userId);
+			 stmt.setString(3,String.valueOf(MessageStatus.DELIVERED).toLowerCase());
 			 stmt.executeUpdate();
 		} catch (SQLException exception) {
 			logger.error("failed to mark message as seen! user id={}", userId, exception);

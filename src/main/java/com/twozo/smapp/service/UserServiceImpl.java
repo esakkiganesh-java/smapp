@@ -38,9 +38,8 @@ class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void update(final User user, final String updateType){
-
-		if(updateType.equals("password")){
+	public void update(final User user, final String updateType) {
+		if(("password").equals(updateType)) {
 			String hashedPassword = passwordEncrypter.hashPassword(user.getPassword());
 			user.setPassword(hashedPassword);
 		}

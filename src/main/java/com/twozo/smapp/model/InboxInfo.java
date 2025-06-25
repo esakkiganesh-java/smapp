@@ -1,12 +1,16 @@
 package com.twozo.smapp.model;
 
-public class InboxInfo {
+public record InboxInfo(int userId, String userName, int unreadMessageCount) {
+
+}
+
+/*public class InboxInfo {
 
     private int userId;
     private String userName;
     private int unreadMessageCount;
 
-    public InboxInfo(final int userId, final String userName, final int unreadMessageCount) {
+    public  InboxInfo(final int userId, final String userName, final int unreadMessageCount) {
         this.userId = userId;
         this.userName = userName;
         this.unreadMessageCount = unreadMessageCount;
@@ -38,3 +42,4 @@ public class InboxInfo {
         this.unreadMessageCount = unReadMessageCount;
     }
 }
+*/
