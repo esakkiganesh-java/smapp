@@ -1,0 +1,25 @@
+# ide files
+.idea
+
+# maven properties
+.mvn
+mvnw.cmd
+mvnw
+
+# tomcat server
+.smarttomcat
+
+# test files
+src/test
+
+# target files
+target
+
+# git attributes
+.gitattributes
+
+# help
+HELP.md
+
+# read me
+README.md
